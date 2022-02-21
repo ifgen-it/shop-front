@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:insert="fragments/general::headers"/>
+<body>
+<th:block th:insert="fragments/general::navbar"/>
+
+<div class="container">
+    <br>
+    <!--<h3 th:if="${product != null}">
+        <a th:text="${product.name}" th:href="@{~/product/{id}(id=${product.id})}"></a>
+    </h3>-->
+    <a th:if="${product != null}"
+       th:href="@{~/product/{id}(id=${product.id})}">
+        <h4 th:text="${product.name}">Product</h4>
+    </a>
+
+    <h4 th:if="${product == null}">New product</h4>
+    <br>
+    <!--    <form>-->
+    <div class="form-group row">
+        <label for="productName" class="col-sm-1 col-form-label">Name</label>
+        <div class="col-sm-6">
+            <input th:value="${product?.name}" id="productName" type="text" class="form-control">
+        </div>
+        <div class="col-sm-3">
+            <small id="errProductName" class="text-danger"></small>
+        </div>
+    </div>
+    <br>
+    <div class="form-group row">
+        <label for="productCategory" class="col-sm-1 col-form-label">Category</label>
+        <div class="col-sm-6">
+            <select class="form-select" aria-label="Default select example"
+                    id="productCategory" name="productCategory">
+<!--                <option selected>Open this select menu</option>-->
+                <option th:each="category : ${categories}"
+                        th:text="${category.name}"
+                        th:value="${category.id}"
+                        th:selected="${category.id == product?.category?.id}"></option>
+            </select>
+        </div>
+        <div class="col-sm-3">
+            <small id="errProductCategory" class="text-danger"></small>
+        </div>
+    </div>
+    <br>
+    <div class="form-group row">
+        <label for="productPrice" class="col-sm-1 col-form-label">Price</label>
+        <div class="col-sm-6">
+            <input th:value="${product?.price}" id="productPrice" type="number" class="form-control">
+        </div>
+        <div class="col-sm-3">
+            <small id="errProductPrice" class="text-danger"></small>
+        </div>
+    </div>
+    <br>
+    <div class="form-group row">
+        <label for="productWeight" class="col-sm-1 col-form-label">Weight</label>
+        <div class="col-sm-6">
+            <input th:value="${product?.weight}" id="productWeight" type="number" class="form-control">
+        </div>
+        <div class="col-sm-3">
+            <small id="errProductWeight" class="text-danger"></small>
+        </div>
+    </div>
+    <br>
+    <div class="form-group row">
+        <label for="productDescription" class="col-sm-1 col-form-label">Description</label>
+        <div class="col-sm-6">
+            <textarea th:text="${product?.description}" id="productDescription" type="text" class="form-control"/>
+        </div>
+        <div class="col-sm-3">
+            <small id="errProductDescription" class="text-danger"></small>
+        </div>
+    </div>
+    <br>
+    <div class="form-group row">
+        <div for="productImage" class="col-sm-1 col-form-label">
+            <span>Image</span>
+            <input class="form-check-input" type="checkbox" id="isNeedImage" checked>
+        </div>
+        <div class="col-sm-6">
+            <input class="form-control" type="file" id="productImage" name="productImage" accept="image/jpeg">
+        </div>
+        <div class="col-sm-3">
+            <small id="errProductImage" class="text-danger"></small>
+        </div>
+    </div>
+
+    <br>
+    <div class="form-group row">
+        <div class="col-sm-1">
+            <small></small>
+        </div>
+        <div class="col-sm-6" th:if="${product == null}">
+            <button id="createProduct" type="submit" class="btn btn-primary">Create product</button>
+        </div>
+        <div class="col-sm-6" th:if="${product != null}">
+            <button id="updateProduct" type="submit" class="btn btn-primary">Update product</button>
+            <input hidden="hidden" id="productId" th:value="${product.id}"/>
+        </div>
+    </div>
+    <br>
+
+
+    <br>
+    <p id="productEditResult"></p>
+
+    <div th:if="${product?.imageBase64 != null}">
+        <img id=productImageOld th:src="${'data:image/jpeg;charset=utf-8;base64,' + product.imageBase64}">
+    </div>
+</div>
+
+<th:block th:insert="fragments/general::scripts"/>
+</body>
+</html>

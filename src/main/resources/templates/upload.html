@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:insert="fragments/general::headers"/>
+
+<body>
+<th:block th:insert="fragments/general::navbar"/>
+
+<div class="container">
+  <br>
+  <h3>Upload image</h3>
+  <br>
+  <br>
+  <form enctype="multipart/form-data" method="post" action="/upload-file">
+    <div class="mb-3">
+      <input id="name" name="name" type="text" class="form-control">
+      <label for="imageFile" class="form-label">Выберете изображение для загрузки</label>
+      <input class="form-control" type="file" id="imageFile" name="imageFile" accept="image/jpeg">
+      <br>
+      <input type="submit" value="Отправить">
+    </div>
+  </form>
+
+  <br>
+  <p th:text="${result}"></p>
+  <div th:if="${imageBase64 != null}">
+    <img th:src="${'data:image/jpeg;charset=utf-8;base64,' + imageBase64}">
+  </div>
+
+</div>
+
+<th:block th:insert="fragments/general::scripts"/>
+</body>
+</html>

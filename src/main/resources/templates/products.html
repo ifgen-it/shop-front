@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:insert="fragments/general::headers"/>
+
+<body>
+<th:block th:insert="fragments/general::navbar"/>
+
+<div class="container">
+    <br>
+    <h3>Products</h3>
+    <a th:href="@{/product-edit}">Create product</a>
+    <br>
+    <br>
+
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        <div th:each="product: ${products}" class="col">
+            <div class="card h-100">
+                <a th:href="@{~/product/{id}(id=${product.id})}">
+                    <img th:src="${'data:image/jpeg;charset=utf-8;base64,' + product?.imageBase64}"
+                         class="card-img-bottom"
+                         alt="Фото товара">
+                </a>
+                <div class="card-body">
+                    <a th:href="@{~/product/{id}(id=${product.id})}">
+                        <h5 th:text="${product.name}" class="card-title">Название</h5>
+                    </a>
+                    <h5 th:text="${product.price} + ' руб.'" class="card-subtitle mb-2 text-muted">Цена</h5>
+                    <h6 th:text="${product.category.name}" class="card-subtitle mb-2 text-muted">Категория</h6>
+                    <h6 th:text="${product.weight} + ' гр.'" class="card-subtitle mb-2 text-muted">Вес</h6>
+<!--                    <p th:text="${product.description}" class="card-text">Description</p>-->
+
+                  <!--  <div class="card-footer">
+                        <small class="text-muted">-->
+                            <a href="#" class="card-link">Купить</a>
+                            <a th:href="@{~/product-edit/{id}(id=${product.id})}" class="card-link">Редактировать</a>
+                    <!--    </small>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <!-- <div th:each="product: ${products}" class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 th:text="${product.name}" class="card-title">Название</h5>
+            <h6 th:text="${product.price} + ' руб.'" class="card-subtitle mb-2 text-muted">Цена</h6>
+            <h6 th:text="${product.category.name}" class="card-subtitle mb-2 text-muted">Категория</h6>
+            <h6 th:text="${product.weight} + ' гр.'" class="card-subtitle mb-2 text-muted">Вес</h6>
+            <p th:text="${product.description}" class="card-text">Description</p>
+            <a th:href="@{~/product-edit/{id}(id=${product.id})}" class="card-link">Edit</a>
+        </div>
+    </div>-->
+
+    <!--<table id="table_products" class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Category</th>
+            <th scope="col">Weight</th>
+            <th scope="col">Description</th>
+            <th scope="col">Image</th>
+            <th scope="col">Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="product: ${products}">
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.price}"></td>
+                <td th:text="${product.category.name}"></td>
+                <td th:text="${product.weight}"></td>
+                <td th:text="${product.description}"></td>
+                <td th:text="${product.image}"></td>
+                <td><a th:href="@{~/product-edit/{id}(id=${product.id})}">Edit</a></td>
+            </tr>
+        </tbody>
+    </table>-->
+</div>
+
+<th:block th:insert="fragments/general::scripts"/>
+</body>
+</html>

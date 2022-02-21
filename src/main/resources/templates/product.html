@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:insert="fragments/general::headers"/>
+<body>
+<th:block th:insert="fragments/general::navbar"/>
+
+<div class="container">
+    <br>
+    <h4 th:text="${product.name}">ProductName</h4>
+    <br>
+
+    <div class="card mb-3">  <!--style="max-width: 540px;">-->
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img th:src="${'data:image/jpeg;charset=utf-8;base64,' + product.imageBase64}"
+                     class="img-fluid rounded-start" alt="Фото товара">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h4 th:text="${product.price} + ' руб.'" >Цена</h4>
+                    <br>
+                    <h6 th:text="'Категория: ' + ${product.category.name}">Категория</h6>
+                    <h6 th:text="'Вес: ' + ${product.weight} + ' гр.'">Вес</h6>
+
+                    <p th:text="${product.description}" class="card-text">Description</p>
+                    <!--                    <p class="card-text"><small class="text-muted">Последнее обновление 3 мин. назад</small></p>-->
+                </div>
+                <div class="card-body">
+                    <a href="#" class="card-link">Купить</a>
+                    <a th:href="@{~/product-edit/{id}(id=${product.id})}" class="card-link">Редактировать</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="card" style="width: 18rem;">
+        <img th:src="${'data:image/jpeg;charset=utf-8;base64,' + product.imageBase64}"
+             class="card-img-top" alt="Фото товара">
+        <div class="card-body">
+            <h5 th:text="${product.name}" class="card-title">Название</h5>
+            <p th:text="${product.description}" class="card-text">Description</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li th:text="${product.price} + ' руб.'" class="list-group-item">Цена</li>
+            <li th:text="${product.category.name}" class="list-group-item">Категория</li>
+            <li th:text="${product.weight} + ' гр.'" class="list-group-item">Вес</li>
+        </ul>
+        <div class="card-body">
+            <a href="#" class="card-link">Купить</a>
+            <a th:href="@{~/product-edit/{id}(id=${product.id})}" class="card-link">Редактировать</a>
+        </div>
+    </div>-->
+
+</div>
+
+<th:block th:insert="fragments/general::scripts"/>
+</body>
+</html>

@@ -1,0 +1,35 @@
+server:
+  port: 1111
+
+service:
+  name: front
+  version: 1.0
+
+spring:
+  application:
+    name: ${service.name}
+  main:
+    allow-bean-definition-overriding: true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+feign:
+  client:
+    config:
+      default:
+        readTimeout: 500000
+        connectTimeout: 500000
+        loggerLevel: basic
+
+gateway:
+  ribbon:
+    listOfServers: 127.0.0.1:2222
+
+
+
+#spring:
+#  cloud:
+#    config:
+#      enabled: false
